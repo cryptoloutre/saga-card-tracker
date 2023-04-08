@@ -1,5 +1,12 @@
 export const sagaNFTInfo = [
   {
+    name: "Ace of Clubs",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/AC.png",
+    artist1: "@TaiyoRobotics",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Ace%2520of%2520Clubs"
+  },
+  {
     name: "Ace of Diamonds",
     image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/AD.png",
     artist1: "@hyblinxx",
@@ -7,11 +14,25 @@ export const sagaNFTInfo = [
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Ace%2520of%2520Diamonds"
   },
   {
+    name: "Ace of Hearts",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/AH.png",
+    artist1: "@0xBanana",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Ace%2520of%2520Hearts"
+  },
+  {
     name: "Ace of Spades",
     image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/AS.png",
     artist1: "@iamwoodyb777",
     artist2: "",
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Ace%2520of%2520Spades"
+  },
+  {
+    name: "Eight of Clubs",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/8C.png",
+    artist1: "@quietmaybe",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Eight%2520of%2520Clubs"
   },
   {
     name: "Eight of Diamonds",
@@ -56,6 +77,13 @@ export const sagaNFTInfo = [
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Five%2520of%2520Hearts"
   },
   {
+    name: "Five of Spades",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/5S.png",
+    artist1: "@sol_fiend_",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Five%2520of%2520Spades"
+  },
+  {
     name: "Four of Clubs",
     image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/4C.png",
     artist1: "@notbunjil",
@@ -89,6 +117,13 @@ export const sagaNFTInfo = [
     artist1: "@twxcrypto",
     artist2: "",
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Jack%2520of%2520Clubs"
+  },
+  {
+    name: "Jack of Diamonds",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/JD.png",
+    artist1: "@catalinawhales",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Jack%2520of%2520Diamonds"
   },
   {
     name: "Jack of Hearts",
@@ -231,6 +266,13 @@ export const sagaNFTInfo = [
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Queen%2520of%2520Diamonds"
   },
   {
+    name: "Queen of Hearts",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/QH.png",
+    artist1: "@twxcrypto",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Queen%2520of%2520Hearts"
+  },
+  {
     name: "Queen of Spades",
     image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/QS.png",
     artist1: "@itsmcnatt",
@@ -245,11 +287,25 @@ export const sagaNFTInfo = [
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Seven%2520of%2520Clubs"
   },
   {
+    name: "Seven of Diamonds",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/7D.png",
+    artist1: "@BenHarleyNFTart",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Seven%2520of%2520Diamonds"
+  },
+  {
     name: "Seven of Hearts",
     image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/7H.png",
     artist1: "@zen0m",
     artist2: "",
     magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Seven%2520of%2520Hearts"
+  },
+  {
+    name: "Seven of Spades",
+    image: "https://shdw-drive.genesysgo.net/52zh6ZjiUQ5UKCwLBwob2k1BC3KF2qhvsE7V4e8g2pmD/7S.png",
+    artist1: "@name_undxfined",
+    artist2: "",
+    magiceden: "https://magiceden.io/marketplace/saga_pass_cards?search=Seven%2520of%2520Spades"
   },
   {
     name: "Six of Clubs",
