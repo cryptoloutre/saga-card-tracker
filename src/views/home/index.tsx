@@ -54,8 +54,6 @@ export const HomeView: FC = ({}) => {
     },
   ];
 
-  const sagaMint = "ER85C9rKfztt9wy3v6nWmxXKoTvBn1kec23yY25Hb8LN";
-
   async function getUserNFT() {
     if (!wallet.publicKey) {
       return;
@@ -64,30 +62,6 @@ export const HomeView: FC = ({}) => {
     const _userSagaNFTs = [];
     const cards = [];
     setIsFetched(false);
-
-    const tokenAccount = await getAssociatedTokenAddress(
-      new PublicKey(sagaMint),
-      publickey
-    );
-
-    const tokenAccountInfo = await connection.getAccountInfo(tokenAccount);
-
-    if (tokenAccountInfo) {
-      const tokenAccountInfo = await connection.getParsedAccountInfo(
-        tokenAccount
-      );
-      const balance =
-        tokenAccountInfo.value.data["parsed"].info.tokenAmount.amount;
-      console.log(balance);
-      if (balance != 0) {
-        setHasSaga(true);
-      } else {
-        setHasSaga(false);
-      }
-    } else {
-      setHasSaga(false);
-      console.log("non");
-    }
 
     const userNFTs = await metaplex
       .nfts()
@@ -126,6 +100,20 @@ export const HomeView: FC = ({}) => {
 
     setUserSagaNFTs(userSagaNFTs);
     setNbUserNFTs(userSagaNFTs.length);
+
+    const sagaPassNFTs = userNFTs.filter(
+      (metadata) =>
+        metadata.collection !== null &&
+        metadata.collection.verified &&
+        metadata.collection.address.toBase58() === "saga8uJYtWyHZ7spe4RVUA5eutbZPQYZe6D9uCkVK6r"
+    );
+
+    if (sagaPassNFTs.length == 0) {
+      setHasSaga(false);
+    }
+    else {
+      setHasSaga(true);
+    }
     setIsFetched(true);
   }
 
