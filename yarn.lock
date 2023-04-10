@@ -2334,7 +2334,7 @@
     "buffer-layout" "^1.2.0"
     "dotenv" "10.0.0"
 
-"@solana/spl-token@^0.3.5", "@solana/spl-token@^0.3.6":
+"@solana/spl-token@^0.3.5", "@solana/spl-token@^0.3.6", "@solana/spl-token@^0.3.7":
   "integrity" "sha512-bKGxWTtIw6VDdCBngjtsGlKGLSmiu/8ghSt/IOYJV24BsymRbgq7r12GToeetpxmPaZYLddKwAz7+EwprLfkfg=="
   "resolved" "https://registry.npmjs.org/@solana/spl-token/-/spl-token-0.3.7.tgz"
   "version" "0.3.7"

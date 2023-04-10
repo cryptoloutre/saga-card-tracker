@@ -2,10 +2,12 @@
 import { FC, useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
-import { Metaplex } from "@metaplex-foundation/js";
+import { Metaplex, PublicKey } from "@metaplex-foundation/js";
 import { sagaCollection } from "../../../lib/collectionAddresses";
 import { Loader } from "components/Loader";
 import { sagaNFTInfo } from "./sagaNFTInfo";
+import { getBestHand } from "utils/getBestHand";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
 
 export const HomeView: FC = ({}) => {
   const wallet = useWallet();
@@ -14,9 +16,45 @@ export const HomeView: FC = ({}) => {
   );
   const metaplex = new Metaplex(connection);
   const [isFetched, setIsFetched] = useState<boolean>(false);
+  const [hasSaga, setHasSaga] = useState<boolean>();
   const [userSagaNFTs, setUserSagaNFTs] = useState<any[]>();
   const [nbUserNFTs, setNbUserNFTs] = useState<number>();
+  const [userBestHand, setUserBestHand] = useState<string>();
+  const [userDiscount, setUserDiscount] = useState<string>();
   const nbTotalNFTsInCollection = sagaNFTInfo.length;
+
+  const discounts = [
+    {
+      hand: "none",
+      discount: "0",
+    },
+    {
+      hand: "pair",
+      discount: "10",
+    },
+    {
+      hand: "3-of-a-kind",
+      discount: "20",
+    },
+    {
+      hand: "straight",
+      discount: "30",
+    },
+    {
+      hand: "4-of-a-kind",
+      discount: "50",
+    },
+    {
+      hand: "royal flush",
+      discount: "100",
+    },
+    {
+      hand: "joker",
+      discount: "900",
+    },
+  ];
+
+  const sagaMint = "ER85C9rKfztt9wy3v6nWmxXKoTvBn1kec23yY25Hb8LN";
 
   async function getUserNFT() {
     if (!wallet.publicKey) {
@@ -24,7 +62,32 @@ export const HomeView: FC = ({}) => {
     }
     const publickey = wallet.publicKey;
     const _userSagaNFTs = [];
+    const cards = [];
     setIsFetched(false);
+
+    const tokenAccount = await getAssociatedTokenAddress(
+      new PublicKey(sagaMint),
+      publickey
+    );
+
+    const tokenAccountInfo = await connection.getAccountInfo(tokenAccount);
+
+    if (tokenAccountInfo) {
+      const tokenAccountInfo = await connection.getParsedAccountInfo(
+        tokenAccount
+      );
+      const balance =
+        tokenAccountInfo.value.data["parsed"].info.tokenAmount.amount;
+      console.log(balance);
+      if (balance != 0) {
+        setHasSaga(true);
+      } else {
+        setHasSaga(false);
+      }
+    } else {
+      setHasSaga(false);
+      console.log("non");
+    }
 
     const userNFTs = await metaplex
       .nfts()
@@ -39,7 +102,11 @@ export const HomeView: FC = ({}) => {
 
     sagaNFTs.map((nft) => {
       const name = nft.name;
-      _userSagaNFTs.push(name);
+      const card = sagaNFTInfo.find((nft) => nft.name == name).card;
+      if (!cards.includes(card)) {
+        cards.push(card);
+        _userSagaNFTs.push(name);
+      }
     });
 
     const userSagaNFTs = _userSagaNFTs.filter(
@@ -47,6 +114,15 @@ export const HomeView: FC = ({}) => {
     );
 
     console.log("Got their Saga NFTs ", userSagaNFTs);
+    console.log(cards);
+
+    const bestHand = getBestHand(cards);
+    console.log("The user's best hand is: ", bestHand);
+    setUserBestHand(bestHand);
+
+    const discount = discounts.find((item) => item.hand == bestHand).discount;
+    console.log("The user will have a discount of: ", discount);
+    setUserDiscount(discount);
 
     setUserSagaNFTs(userSagaNFTs);
     setNbUserNFTs(userSagaNFTs.length);
@@ -83,6 +159,79 @@ export const HomeView: FC = ({}) => {
               </span>{" "}
               NFTs!
               <br />
+              {userBestHand != "none" && hasSaga && (
+                <div className="mt-2">
+                  <div>
+                    Your best hand is{" "}
+                    <span className="font-black text-[#14F195]">
+                      {userBestHand}
+                    </span>
+                    !
+                  </div>
+                  <div>
+                    You{" "}
+                    <span className="font-extrabold underline text-[#00FF00]">
+                      will have
+                    </span>{" "}
+                    a discount of{" "}
+                    <span className="font-black text-[#14F195]">
+                      {userDiscount}$
+                    </span>
+                    ! See{" "}
+                    <a
+                      href="https://twitter.com/solanamobile/status/1644463719064403968"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#9945FF] font-black"
+                    >
+                      anouncement
+                    </a>
+                    .
+                  </div>
+                </div>
+              )}
+              {userBestHand == "none" && hasSaga && (
+                <div className="mt-2">
+                  <div>You haven&apos;t poker hand!</div>
+                  <div>
+                    You{" "}
+                    <span className="font-extrabold underline text-[#FF0000]">
+                      will not have
+                    </span>{" "}
+                    a discount! See{" "}
+                    <a
+                      href="https://twitter.com/solanamobile/status/1644463719064403968"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#9945FF] font-black"
+                    >
+                      anouncement
+                    </a>
+                    .
+                  </div>
+                </div>
+              )}
+              {!hasSaga && (
+                <div className="mt-2">
+                  <div>You haven&apos;t a Saga Pass!</div>
+                  <div>
+                    You{" "}
+                    <span className="font-extrabold underline text-[#FF0000]">
+                      will not have
+                    </span>{" "}
+                    a discount! See{" "}
+                    <a
+                      href="https://twitter.com/solanamobile/status/1644463719064403968"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#9945FF] font-black"
+                    >
+                      anouncement
+                    </a>
+                    .
+                  </div>
+                </div>
+              )}
             </div>
           )}
           {wallet.publicKey && !isFetched && <Loader />}
